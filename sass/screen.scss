@@ -44,7 +44,10 @@ a {
     padding: 0.809em;
     max-width: 30em;
     margin: auto;
-    #gistid {
+
+    #gistid,
+    #gist-author {
+        float: left;
         font-weight: normal;
         color: #ccc;
         font-size: 0.8em;
@@ -56,6 +59,11 @@ a {
             }
         }
     }
+
+    #gist-author {
+        float: right;
+    }
+
     #description {
         @include titling;
         font-weight: 500;

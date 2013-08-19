@@ -2,6 +2,12 @@ var Gisted = (function($, undefined) {
     var gist = function(gist_id) {
         var gistxhr = $.getJSON('/' + gist_id + '/content')
             .done(function(data, textStatus, xhr) {
+
+                var author = data['user']['login'];
+                var url = data['user']['html_url'];
+                var $authorLink = $("#author-link");
+                $authorLink.text(author).attr('href', url);
+
                 var description = data['description'];
                 if (description) {
                     $("#description").text(description);
