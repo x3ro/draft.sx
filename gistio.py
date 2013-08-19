@@ -3,7 +3,7 @@ import json
 import urlparse
 
 from redis import StrictRedis
-from markdown2 import markdown
+from markdown import markdown
 import requests
 import bleach
 
