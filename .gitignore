@@ -4,3 +4,6 @@
 *.ipynb
 *.sublime-project
 *.sublime-workspace
+
+# Shouldn't be tracked since it's generated from SASS
+static/css/
