@@ -7,6 +7,8 @@ from markdown import markdown
 import requests
 import bleach
 
+from util import HashConverter
+
 from flask import Flask, render_template, make_response, abort, request
 app = Flask(__name__)
 
@@ -50,6 +52,8 @@ ALLOWED_ATTRIBUTES = {
     "img": ["src"],
 }
 
+app.url_map.converters['hash'] = HashConverter
+
 @app.route('/oauth')
 def oauth():
     app.logger.warning("Method: {}".format(request.method))
@@ -61,12 +65,12 @@ def homepage():
     return render_template('home.html', STATIC_URL=STATIC_URL)
 
 
-@app.route('/<int:id>')
+@app.route('/<hash:id>')
 def render_gist(id):
     return render_template('gist.html', gist_id=id, STATIC_URL=STATIC_URL)
 
 
-@app.route('/<int:id>/content')
+@app.route('/<hash:id>/content')
 def gist_contents(id):
     cache_hit = True
     content = cache.get(id)
