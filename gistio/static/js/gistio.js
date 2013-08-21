@@ -31,12 +31,6 @@ var Gisted = (function($, undefined) {
                 if (empty) {
                     apologize("No Content Found");
                 }
-
-                if (xhr.getResponseHeader("X-Cache-Hit") == "True") {
-                    mixpanel.track("Cache Hit");
-                } else {
-                    mixpanel.track("Cache Miss");
-                }
             })
             .fail(function(xhr, status, error) {
                 if (xhr.status == 404) {
