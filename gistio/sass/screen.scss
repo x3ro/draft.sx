@@ -153,8 +153,26 @@ article {
     .codehilite {
         padding: 0.1em 0.5em;
         background: #1d1f21;
-        font-size: 0.88em;
+        font-size: 0.75em;
+        line-height: 1.5em;
         overflow: scroll;
+    }
+}
+
+
+.gist {
+    font-size: 0.75em;
+    line-height: 1.5em;
+}
+
+.loading-embedded-gist {
+    @include animation(throb 1s infinite alternate linear);
+
+    padding: 5px;
+    text-align: center;
+
+    &:before {
+        content: "Loading embedded Gist";
     }
 }
 

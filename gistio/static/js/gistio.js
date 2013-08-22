@@ -31,6 +31,8 @@ var Gisted = (function($, undefined) {
                 if (empty) {
                     apologize("No Content Found");
                 }
+
+                triggerLoadEmbeddedGists();
             })
             .fail(function(xhr, status, error) {
                 if (xhr.status == 404) {
