@@ -1,2 +1,2 @@
 web: python gistio.py
-sass: sass --watch sass:static/css
+sass: sass --watch gistio/sass:gistio/static/css
