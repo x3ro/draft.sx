@@ -20,20 +20,19 @@ GITHUB_CLIENT_SECRET = os.environ.get('GITHUB_CLIENT_SECRET')
 AUTH_PARAMS = {'client_id': GITHUB_CLIENT_ID,
                'client_secret': GITHUB_CLIENT_SECRET}
 
-
 if HEROKU:
     urlparse.uses_netloc.append('redis')
-    redis_url = urlparse.urlparse(os.environ['REDISTOGO_URL'])
+    redis_url = urlparse.urlparse(os.environ['REDISCLOUD_URL'])
+    print redis_url
     cache = StrictRedis(host=redis_url.hostname,
                         port=redis_url.port,
                         password=redis_url.password)
     PORT = int(os.environ.get('PORT', 5000))
-    STATIC_URL = '//static.gist.io/'
 else:
     cache = StrictRedis()  # local development
     PORT = 5000
-    STATIC_URL = '/static/'
 
+STATIC_URL = '/static/'
 CACHE_EXPIRATION = 60  # seconds
 
 RENDERABLE = (u'Markdown', u'Text', u'Literate CoffeeScript', None)
