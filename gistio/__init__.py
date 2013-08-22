@@ -103,7 +103,7 @@ def fetch_and_render(id):
     for f in decoded['files'].values():
         if f['language'] in RENDERABLE:
             app.logger.debug('{}: renderable!'.format(f['filename']))
-            f['rendered'] = markdown(f['content'], extensions=['attr_list'])
+            f['rendered'] = markdown(f['content'], extensions=['attr_list', 'fenced_code', 'codehilite'])
 
     encoded = json.dumps(decoded)
     cache.setex(id, CACHE_EXPIRATION, encoded)

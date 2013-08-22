@@ -150,10 +150,11 @@ article {
     pre, code, samp {
         font-family: 'Source Code Pro', monospace;
     }
-    .highlight {
+    .codehilite {
         padding: 0.1em 0.5em;
         background: #1d1f21;
-        font-size: 0.88em
+        font-size: 0.88em;
+        overflow: scroll;
     }
 }
 
