@@ -61,7 +61,7 @@ def oauth():
 
 @app.route('/')
 def homepage():
-    return render_template('home.html', STATIC_URL=STATIC_URL)
+    return render_gist(6274616)
 
 
 @app.route('/<hash:id>')
