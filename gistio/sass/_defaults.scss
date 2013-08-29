@@ -2,11 +2,12 @@
 $default-transition-duration: 0.25s;
 
 @mixin copy {
-    font-family: 'Sentinel SSm A', 'Sentinel SSm B', Georgia, serif;
+    font-family: Georgia, serif;
 }
 
 @mixin titling {
-    font-family: 'Tungsten A', 'Tungsten B';
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 600;
 }
 
 $link: #4da7ca;

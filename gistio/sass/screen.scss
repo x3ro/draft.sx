@@ -67,8 +67,7 @@ a {
 
     #description {
         @include titling;
-        font-weight: 500;
-        font-size: 5em;
+        font-size: 4em;
         text-transform: uppercase;
         line-height: 1em;
         &.loading {
