@@ -7,3 +7,5 @@
 
 # Shouldn't be tracked since it's generated from SASS
 #gistio/static/css/
+
+venv
