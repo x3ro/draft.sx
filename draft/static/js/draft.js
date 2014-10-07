@@ -3,10 +3,12 @@ var Gisted = (function($, undefined) {
         var gistxhr = $.getJSON('/' + gist_id + '/content')
             .done(function(data, textStatus, xhr) {
 
-                var author = data['owner']['login'];
-                var url = data['owner']['html_url'];
-                var $authorLink = $("#author-link");
-                $authorLink.text(author).attr('href', url);
+                if(typeof(data['owner']) !== 'undefined' && data['owner'] !== null) {
+                    var author = data['owner']['login'];
+                    var url = data['owner']['html_url'];
+                    var $authorLink = $("#author-link");
+                    $authorLink.text(author).attr('href', url);
+                }
 
                 var description = data['description'];
                 if (description) {
