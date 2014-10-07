@@ -3,8 +3,8 @@ var Gisted = (function($, undefined) {
         var gistxhr = $.getJSON('/' + gist_id + '/content')
             .done(function(data, textStatus, xhr) {
 
-                var author = data['user']['login'];
-                var url = data['user']['html_url'];
+                var author = data['owner']['login'];
+                var url = data['owner']['html_url'];
                 var $authorLink = $("#author-link");
                 $authorLink.text(author).attr('href', url);
 
