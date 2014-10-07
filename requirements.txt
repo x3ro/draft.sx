@@ -6,3 +6,4 @@ redis==2.7.6
 requests==1.2.3
 pygments==1.6
 werkzeug
+honcho
