@@ -1,13 +1,13 @@
 import os
 import json
-import urlparse
+import urllib.parse
 
 from redis import StrictRedis
 from markdown import markdown
 import requests
 import bleach
 
-from util import HashConverter
+from gistio.util import HashConverter
 
 from flask import Flask, render_template, make_response, abort, request
 app = Flask(__name__)
@@ -23,7 +23,7 @@ AUTH_PARAMS = {'client_id': GITHUB_CLIENT_ID,
 if HEROKU:
     urlparse.uses_netloc.append('redis')
     redis_url = urlparse.urlparse(os.environ['REDISCLOUD_URL'])
-    print redis_url
+    print(redis_url)
     cache = StrictRedis(host=redis_url.hostname,
                         port=redis_url.port,
                         password=redis_url.password)
