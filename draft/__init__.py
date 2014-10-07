@@ -7,7 +7,7 @@ from markdown import markdown
 import requests
 import bleach
 
-from gistio.util import HashConverter
+from draft.util import HashConverter
 
 from flask import Flask, render_template, make_response, abort, request
 app = Flask(__name__)
@@ -33,7 +33,7 @@ else:
     PORT = 5000
 
 STATIC_URL = '/static/'
-CACHE_EXPIRATION = 60  # seconds
+CACHE_EXPIRATION = 1  # seconds
 
 RENDERABLE = (u'Markdown', u'Text', u'Literate CoffeeScript', None)
 

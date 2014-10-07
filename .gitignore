@@ -6,6 +6,7 @@
 *.sublime-workspace
 
 # Shouldn't be tracked since it's generated from SASS
-draft/static/css/
+draft/static/css/*
+!draft/static/css/.gitkeep
 
 venv

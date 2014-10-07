@@ -1,1 +1,1 @@
-web: python gistio.py
+web: python draft.py
