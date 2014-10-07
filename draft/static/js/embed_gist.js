@@ -3,7 +3,7 @@
     function EmbedGist($element) {
         var that = this;
 
-        this.id = parseInt($element.text());
+        this.id = $element.text();
 
         this.$container = $('<div>')
             .addClass('loading-embedded-gist')

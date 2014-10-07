@@ -68,9 +68,9 @@ def homepage():
 def render_gist(id):
     return render_template('gist.html', gist_id=id, STATIC_URL=STATIC_URL)
 
-@app.route('/embed_gist/<int:id>')
-def embed_gist(id):
-    embed_url = 'https://gist.github.com/x3ro/{}.js'.format(id)
+@app.route('/embed_gist/<user>/<id>')
+def embed_gist(user, id):
+    embed_url = 'https://gist.github.com/{}/{}.js'.format(user, id)
     r = requests.get(embed_url)
     if r.status_code != 200:
         app.logger.warning('Fetching gist embed script for id {} failed: {}'.format(id, r.status_code))
