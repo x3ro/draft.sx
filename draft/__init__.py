@@ -21,8 +21,8 @@ AUTH_PARAMS = {'client_id': GITHUB_CLIENT_ID,
                'client_secret': GITHUB_CLIENT_SECRET}
 
 if HEROKU:
-    urlparse.uses_netloc.append('redis')
-    redis_url = urlparse.urlparse(os.environ['REDISCLOUD_URL'])
+    urllib.parse.uses_netloc.append('redis')
+    redis_url = urllib.parse.urlparse(os.environ['REDISCLOUD_URL'])
     print(redis_url)
     cache = StrictRedis(host=redis_url.hostname,
                         port=redis_url.port,
