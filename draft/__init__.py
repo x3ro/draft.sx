@@ -55,16 +55,9 @@ ALLOWED_ATTRIBUTES = {
 
 app.url_map.converters['hash'] = HashConverter
 
-@app.route('/oauth')
-def oauth():
-    app.logger.warning("Method: {}".format(request.method))
-    app.logger.warning("Args: {}".format(request.args))
-    return(u"oauth")
-
 @app.route('/')
 def homepage():
     return render_gist(6274616)
-
 
 @app.route('/<hash:id>')
 def render_gist(id):
