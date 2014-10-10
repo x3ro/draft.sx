@@ -46,6 +46,8 @@ a {
     max-width: 30em;
     margin: auto;
 
+    overflow: hidden;
+
     #gistid,
     #gist-author {
         float: left;
@@ -147,6 +149,7 @@ article {
     }
     pre, code, samp {
         font-family: 'Source Code Pro', monospace;
+        word-wrap:break-word;
     }
     .codehilite {
         padding: 0.1em 0.5em;
