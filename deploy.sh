@@ -1,6 +1,8 @@
 #!/bin/bash -xe
 
-git checkout heroku
+git branch -D heroku
+git checkout -b heroku master
+git merge -q heroku_branch_patches >> /dev/null
 cd draft
 compass compile
 cd ..
