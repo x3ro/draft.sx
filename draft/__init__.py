@@ -74,7 +74,16 @@ def render_gist(id):
         content = json.loads(content.decode("utf-8"))
 
 
-    return render_template('gist.html', gist_id=id, STATIC_URL=STATIC_URL, content=content)
+    return render_template(
+        'gist.html',
+        gist_id = id,
+        STATIC_URL = STATIC_URL,
+        content = content,
+        monitoring = {
+            'google_analytics': os.environ.get('GOOGLE_ANALYTICS'),
+            'pingdom': os.environ.get('PINGDOM')
+        }
+    )
 
 @app.route('/embed_gist/<user>/<id>')
 def embed_gist(user, id):
