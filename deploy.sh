@@ -4,7 +4,7 @@ git branch -D heroku
 git checkout -b heroku master
 git merge -q heroku_branch_patches >> /dev/null
 cd draft
-compass compile
+compass compile -e production --force
 cd ..
 git add -A .
 git commit -a -m 'update assets' || true
