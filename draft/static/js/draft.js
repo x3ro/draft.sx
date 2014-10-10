@@ -1,5 +1,10 @@
 var Gisted = (function($, undefined) {
     var gist = function(gist_id) {
+        if($('section.content').data('loaded')) {
+            triggerLoadEmbeddedGists();
+            return;
+        }
+
         var gistxhr = $.getJSON('/' + gist_id + '/content')
             .done(function(data, textStatus, xhr) {
 

@@ -8,6 +8,7 @@ import requests
 import bleach
 
 from draft.util import HashConverter
+from draft.jinja_ext import JinjaExtensions
 
 from flask import Flask, render_template, make_response, abort, request
 app = Flask(__name__)
@@ -52,6 +53,9 @@ ALLOWED_ATTRIBUTES = {
     "abbr": ["title"],
     "img": ["src"],
 }
+
+# Load custom Jinja functions for Draft
+JinjaExtensions(app)
 
 app.url_map.converters['hash'] = HashConverter
 
