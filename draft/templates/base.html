@@ -18,6 +18,20 @@
     <link rel="stylesheet" href="{{ STATIC_URL }}css/screen.css">
     {% block extra_head %}
     {% endblock extra_head %}
+
+    {% if dict_get(monitoring, 'pingdom', None): %}
+        <script>
+        var _prum = [['id', '{{ monitoring.pingdom }}'],
+                     ['mark', 'firstbyte', (new Date()).getTime()]];
+        (function() {
+            var s = document.getElementsByTagName('script')[0]
+              , p = document.createElement('script');
+            p.async = 'async';
+            p.src = '//rum-static.pingdom.net/prum.min.js';
+            s.parentNode.insertBefore(p, s);
+        })();
+        </script>
+    {% endif %}
 </head>
 <body>
 
