@@ -1,17 +1,21 @@
 import os
 import json
 import urllib.parse
-
-from redis import StrictRedis
-from markdown import markdown
 import requests
 import bleach
 
+from redis import StrictRedis
+from flask import Flask, render_template, make_response, abort, request
+
+from draft import markup
 from draft.util import HashConverter
 from draft.jinja_ext import JinjaExtensions
 
-from flask import Flask, render_template, make_response, abort, request
-app = Flask(__name__)
+
+
+# ==========================
+# Initialize the environemnt
+# ==========================
 
 HEROKU = 'HEROKU' in os.environ
 
@@ -34,30 +38,30 @@ if HEROKU:
 else:
     cache = StrictRedis()  # local development
     PORT = 5000
-    CACHE_EXPIRATION = 1
+    CACHE_EXPIRATION = 20
 
 STATIC_URL = '/static/'
 
-RENDERABLE = (u'Markdown', u'Text', u'Literate CoffeeScript', None)
 
-ALLOWED_TAGS = [
-    "a", "abbr", "acronym", "b", "blockquote", "code", "em", "i", "li", "ol", "strong",
-    "ul", "br", "img", "span", "div", "pre", "p", "dl", "dd", "dt", "tt", "cite", "h1",
-    "h2", "h3", "h4", "h5", "h6", "table", "col", "tr", "td", "th", "tbody", "thead",
-    "colgroup", "hr",
-]
 
-ALLOWED_ATTRIBUTES = {
-    "a": ["href", "title"],
-    "acronym": ["title"],
-    "abbr": ["title"],
-    "img": ["src"],
-}
+# ==========================
+# Initialize the app
+# ==========================
+
+app = Flask(__name__)
+
+markup = markup.Markup(app)
 
 # Load custom Jinja functions for Draft
 JinjaExtensions(app)
 
 app.url_map.converters['hash'] = HashConverter
+
+
+
+# ==========================
+# Routes
+# ==========================
 
 @app.route('/')
 def homepage():
@@ -65,7 +69,12 @@ def homepage():
 
 @app.route('/<hash:id>')
 def render_gist(id):
-    return render_template('gist.html', gist_id=id, STATIC_URL=STATIC_URL)
+    content = cache.get(id)
+    if content:
+        content = json.loads(content.decode("utf-8"))
+
+
+    return render_template('gist.html', gist_id=id, STATIC_URL=STATIC_URL, content=content)
 
 @app.route('/embed_gist/<user>/<id>')
 def embed_gist(user, id):
@@ -108,13 +117,8 @@ def fetch_and_render(id):
         return None
 
     for f in decoded['files'].values():
-        if f['language'] in RENDERABLE:
-            app.logger.debug('{}: renderable!'.format(f['filename']))
-            f['rendered'] = markdown(f['content'], extensions=['attr_list', 'fenced_code', 'codehilite'])
+        f = markup.render(f)
 
     encoded = json.dumps(decoded)
     cache.setex(id, CACHE_EXPIRATION, encoded)
     return encoded
-
-
-
