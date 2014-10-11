@@ -1,7 +1,7 @@
 from markdown import markdown
 
 class Markup:
-    RENDERABLE = (u'Markdown', u'Text', u'Literate CoffeeScript', None)
+    RENDERABLE = (u'Markdown', u'Text', u'Literate CoffeeScript')
 
     # XXX This isn't used anymore. Should it be re-enabled with current MD parser?
     ALLOWED_TAGS = [
