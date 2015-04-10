@@ -18,6 +18,7 @@ var Gisted = (function($, undefined) {
                 var description = data['description'];
                 if (description) {
                     $("#description").text(description);
+                    document.title = document.title.replace("#" + gist_id, description);
                 } else {
                     $("#description").text('');
                 }
