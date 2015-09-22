@@ -31,7 +31,7 @@ var Gisted = (function($, undefined) {
                         var filediv = $('<article>')
                             .attr('class', 'file')
                             .attr('data-filename', file['filename']);
-                        filediv.html("<h1>" + file['filename'] + "</h1>" + file['rendered']);
+                        filediv.html(file['rendered']);
                         $('#gistbody').append(filediv);
                     }
                 }

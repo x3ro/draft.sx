@@ -2,47 +2,39 @@
 
 {% block title %}draft.sx &middot; #{{ gist_id }}{% endblock %}
 
+{% block sitetitle %}<a href="http://draft.sx">draft.sx</a> <a href="http://gist.github.com/{{ gist_id }}">#{{ gist_id }}</a>{% endblock %}
+
+
+{% block navigation %}
+    Written by <a id="author-link" href="{{ dict_get(content, 'owner.html_url', 'javascript:void(0);') }}">
+        {{ dict_get(content, 'owner.login', 'anonymous') }}
+    </a>
+{% endblock %}
+
 {% block content %}
 
     <section class="content" {% if content %} data-loaded="true" {% endif %}>
-        <header>
-            <h1 id="gist-author">Written by
-                <a id="author-link" href="{{ dict_get(content, 'owner.html_url', 'javascript:void(0);') }}">
-                    {{ dict_get(content, 'owner.login', 'anonymous') }}
-                </a>
-            </h1>
+        {% if content %}
+            <div class="post-header mb2">
+              <h1 id="description">{{ dict_get(content, 'description', 'No title') }}</h1>
+            </div>
 
-            <h1 id="gistid">
-                <a href="https://gist.github.com/{{ gist_id }}">gist #{{ gist_id }}</a>
-            </h1>
-
-            <div class="clearfix"></div>
-
-
-            {% if content %}
-                <h2 id="description" class="instapaper_title entry-title">
-                    {{ dict_get(content, 'description', 'No title') }}
-                </h2>
-                </header>
-
-                {% for file in content.files %}
-                    <div id="gistbody" class="instapaper_body entry-content">
+            <article class="post-content">
+              {% for file in content.files %}
+                    <div id="gistbody" class="entry-content">
                         <article class='file' data-filename='{{ file }}'>
                             {{ content.files[file].rendered|safe }}
                         </article>
                     </div>
                 {% endfor %}
-            {% else %}
-                <h2 id="description" class="loading instapaper_title entry-title">
-                    Loading...
-                </h2>
-                </header>
-                <div id="gistbody" class="instapaper_body entry-content"></div>
-            {% endif %}
+            </article>
+        {% else %}
+            <div class="post-header mb2" >
+                <h1 id="description">Loading...</h1>
+            </div>
+            <div id="gistbody" class="entry-content"></div>
+        {% endif %}
 
-        <footer>
-            <p><a href="/">draft.sx</a></p>
-        </footer>
     </section>
 {% endblock %}
 
