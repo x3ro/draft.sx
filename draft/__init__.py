@@ -17,7 +17,7 @@ from draft.jinja_ext import JinjaExtensions
 # Initialize the environemnt
 # ==========================
 
-HEROKU = 'HEROKU' in os.environ
+DEVELOPMENT = 'DEVELOPMENT' in os.environ
 
 GITHUB_CLIENT_ID = os.environ.get('GITHUB_CLIENT_ID')
 GITHUB_CLIENT_SECRET = os.environ.get('GITHUB_CLIENT_SECRET')
@@ -26,19 +26,8 @@ AUTH_PARAMS = {'client_id': GITHUB_CLIENT_ID,
                'client_secret': GITHUB_CLIENT_SECRET}
 
 CACHE_EXPIRATION = 120  # seconds
-
-if HEROKU:
-    urllib.parse.uses_netloc.append('redis')
-    redis_url = urllib.parse.urlparse(os.environ['REDISCLOUD_URL'])
-    print(redis_url)
-    cache = StrictRedis(host=redis_url.hostname,
-                        port=redis_url.port,
-                        password=redis_url.password)
-    PORT = int(os.environ.get('PORT', 5000))
-else:
-    cache = StrictRedis()  # local development
-    PORT = 5000
-    CACHE_EXPIRATION = 20
+cache = StrictRedis()
+PORT = 5000
 
 STATIC_URL = '/static/'
 
