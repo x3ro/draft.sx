@@ -54,7 +54,7 @@ app.url_map.converters['hash'] = HashConverter
 
 @app.route('/')
 def homepage():
-    return render_gist(6274616)
+    return render_gist('691fe85788524e6627fa')
 
 @app.route('/<hash:id>')
 def render_gist(id):
