@@ -39,15 +39,15 @@
 {% endblock %}
 
 {% block js %}
+    {% assets "js_all" %}
+        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+    {% endassets %}
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-<script src="{{ STATIC_URL }}js/draft.js"></script>
-<script src="{{ STATIC_URL }}js/embed_gist.js"></script>
-<script>
-    $(function() {
-        Gisted.gist("{{gist_id}}");
-    });
-</script>
+    <script>
+        $(function() {
+            Gisted.gist("{{gist_id}}");
+        });
+    </script>
 {% endblock js %}
 
 {% block extra_head %}

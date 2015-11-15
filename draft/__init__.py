@@ -7,7 +7,7 @@ import bleach
 from redis import StrictRedis
 from flask import Flask, render_template, make_response, abort, request
 
-from draft import markup
+from draft import markup, assets
 from draft.util import HashConverter
 from draft.jinja_ext import JinjaExtensions
 
@@ -38,8 +38,8 @@ STATIC_URL = '/static/'
 # ==========================
 
 app = Flask(__name__)
-
 markup = markup.Markup(app)
+assets.setup(app)
 
 # Load custom Jinja functions for Draft
 JinjaExtensions(app)

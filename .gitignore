@@ -10,3 +10,6 @@ draft/static/css/*
 !draft/static/css/.gitkeep
 
 venv
+.webassets-cache/
+
+packed.js
