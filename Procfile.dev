@@ -1,3 +1,2 @@
 db: redis-server /usr/local/etc/redis.conf
 web: python draft.py
-sass: sass --watch draft/sass:draft/static/css
