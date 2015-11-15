@@ -8,7 +8,7 @@ from redis import StrictRedis
 from flask import Flask, render_template, make_response, abort, request
 
 from draft import markup, assets
-from draft.util import HashConverter
+from draft.util import HashConverter, gist_page_title
 from draft.jinja_ext import JinjaExtensions
 
 
@@ -116,6 +116,8 @@ def fetch_and_render(id):
 
     for f in decoded['files'].values():
         f = markup.render(f)
+
+    decoded['page_title'] = gist_page_title(decoded)
 
     encoded = json.dumps(decoded)
     cache.setex(id, CACHE_EXPIRATION, encoded)

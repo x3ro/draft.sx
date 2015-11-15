@@ -26,4 +26,3 @@ class JinjaExtensions:
                 return defaultValue
 
         return someDict
-

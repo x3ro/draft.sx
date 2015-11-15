@@ -1,3 +1,9 @@
+var decodeHtmlEntity = function(str) {
+  return str.replace(/&#(\d+);/g, function(match, dec) {
+    return String.fromCharCode(dec);
+  });
+};
+
 var Gisted = (function($, undefined) {
     var gist = function(gist_id) {
         if($('section.content').data('loaded')) {
@@ -15,10 +21,10 @@ var Gisted = (function($, undefined) {
                     $authorLink.text(author).attr('href', url);
                 }
 
+                document.title = decodeHtmlEntity(data["page_title"]);
                 var description = data['description'];
                 if (description) {
                     $("#description").text(description);
-                    document.title = document.title.replace("#" + gist_id, description);
                 } else {
                     $("#description").text('');
                 }

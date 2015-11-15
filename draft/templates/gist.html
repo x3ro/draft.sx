@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}draft.sx &middot; #{{ gist_id }}{% endblock %}
+{% block title %}{% if content %}{{ content.page_title|safe }}{% else %}draft.sx{% endif %}{% endblock %}
 
 {% block sitetitle %}<a href="http://draft.sx">draft.sx</a> <a href="http://gist.github.com/{{ gist_id }}">#{{ gist_id }}</a>{% endblock %}
 
