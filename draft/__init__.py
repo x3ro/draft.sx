@@ -10,14 +10,13 @@ from flask import Flask, render_template, make_response, abort, request
 from draft import markup, assets
 from draft.util import HashConverter, gist_page_title
 from draft.jinja_ext import JinjaExtensions
+from draft.development import maybe_enable_dev_mode
 
 
 
 # ==========================
 # Initialize the environemnt
 # ==========================
-
-DEVELOPMENT = 'DEVELOPMENT' in os.environ
 
 GITHUB_CLIENT_ID = os.environ.get('GITHUB_CLIENT_ID')
 GITHUB_CLIENT_SECRET = os.environ.get('GITHUB_CLIENT_SECRET')
@@ -46,6 +45,7 @@ JinjaExtensions(app)
 
 app.url_map.converters['hash'] = HashConverter
 
+DEVELOPMENT = maybe_enable_dev_mode(app)
 
 
 # ==========================
