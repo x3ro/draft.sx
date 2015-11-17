@@ -75,22 +75,6 @@ def render_gist(id):
         }
     )
 
-@app.route('/<hash:id>/content')
-def gist_contents(id):
-    cache_hit = True
-    content = cache.get(id)
-    if not content:
-        cache_hit = False
-        content = fetch_and_render(id)
-    if content is None:
-        abort(404)
-    resp = make_response(content, 200)
-    resp.headers['Content-Type'] = 'application/json'
-    resp.headers['X-Cache-Hit'] = cache_hit
-    resp.headers['X-Expire-TTL-Seconds'] = cache.ttl(id)
-    return resp
-
-
 def fetch_and_render(id):
     """Fetch and render a post from the Github API"""
     r = requests.get('https://api.github.com/gists/{}'.format(id),
