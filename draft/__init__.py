@@ -75,16 +75,6 @@ def render_gist(id):
         }
     )
 
-@app.route('/embed_gist/<user>/<id>')
-def embed_gist(user, id):
-    embed_url = 'https://gist.github.com/{}/{}.js'.format(user, id)
-    r = requests.get(embed_url)
-    if r.status_code != 200:
-        app.logger.warning('Fetching gist embed script for id {} failed: {}'.format(id, r.status_code))
-
-    resp = make_response(r.text, 200)
-    return resp
-
 @app.route('/<hash:id>/content')
 def gist_contents(id):
     cache_hit = True
