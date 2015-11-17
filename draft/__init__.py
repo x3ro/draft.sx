@@ -8,7 +8,7 @@ from redis import StrictRedis
 from flask import Flask, render_template, make_response, abort, request
 
 from draft import markup, assets
-from draft.util import HashConverter, gist_page_title
+from draft.util import HashConverter, gist_page_title, get_dict_element
 from draft.jinja_ext import JinjaExtensions
 from draft.development import maybe_enable_dev_mode
 
@@ -61,7 +61,8 @@ def render_gist(id):
     content = cache.get(id)
     if content:
         content = json.loads(content.decode("utf-8"))
-
+    else:
+        content = fetch_and_render(id)
 
     return render_template(
         'gist.html',
@@ -114,11 +115,19 @@ def fetch_and_render(id):
         app.logger.error('Fetch {} failed: unable to decode JSON response'.format(id))
         return None
 
-    for f in decoded['files'].values():
-        f = markup.render(f)
-
-    decoded['page_title'] = gist_page_title(decoded)
-
-    encoded = json.dumps(decoded)
+    cache_data = process_gist(decoded)
+    encoded = json.dumps(cache_data)
     cache.setex(id, CACHE_EXPIRATION, encoded)
-    return encoded
+    return cache_data
+
+def process_gist(response):
+    cache_data = {}
+    cache_data['page_title'] = gist_page_title(response)
+    cache_data['author'] = get_dict_element(response, 'owner.login', 'anonymous')
+    cache_data['description'] = response['description'] or 'No title'
+
+    cache_data['files'] = {}
+    for name in response['files']:
+        cache_data['files'][name] = markup.render(response['files'][name])
+
+    return cache_data

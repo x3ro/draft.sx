@@ -12,42 +12,24 @@
 {% endblock %}
 
 {% block content %}
-
     <section class="content" {% if content %} data-loaded="true" {% endif %}>
-        {% if content %}
-            <div class="post-header mb2">
-              <h1 id="description">{{ dict_get(content, 'description', 'No title') }}</h1>
-            </div>
+        <div class="post-header mb2">
+          <h1 id="description">{{ content.description }}</h1>
+        </div>
 
-            <article class="post-content">
-              {% for file in content.files %}
-                    <div id="gistbody" class="entry-content">
-                        <article class='file' data-filename='{{ file }}'>
-                            {{ content.files[file].rendered|safe }}
-                        </article>
-                    </div>
-                {% endfor %}
-            </article>
-        {% else %}
-            <div class="post-header mb2" >
-                <h1 id="description">Loading...</h1>
-            </div>
-            <div id="gistbody" class="entry-content"></div>
-        {% endif %}
-
+        <article class="post-content">
+          {% for file in content.files %}
+                <div id="gistbody" class="entry-content">
+                    <article class='file' data-filename='{{ file }}'>
+                        {{ content.files[file].rendered|safe }}
+                    </article>
+                </div>
+            {% endfor %}
+        </article>
     </section>
 {% endblock %}
 
 {% block js %}
-    {% assets "js_all" %}
-        <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-
-    <script>
-        $(function() {
-            Gisted.gist("{{gist_id}}");
-        });
-    </script>
 {% endblock js %}
 
 {% block extra_head %}
