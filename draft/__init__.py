@@ -70,8 +70,7 @@ def render_gist(id):
         STATIC_URL = STATIC_URL,
         content = content,
         monitoring = {
-            'google_analytics': os.environ.get('GOOGLE_ANALYTICS'),
-            'pingdom': os.environ.get('PINGDOM')
+            'google_analytics': os.environ.get('GOOGLE_ANALYTICS')
         }
     )
 
