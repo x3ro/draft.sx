@@ -13,3 +13,5 @@ venv
 .webassets-cache/
 
 packed.js
+*.rdb
+build/
