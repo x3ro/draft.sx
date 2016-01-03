@@ -4,11 +4,9 @@ import os
 from flask import Flask
 from draft.development import maybe_enable_dev_mode
 
-from . import assets
 from . import jinja
 from . import util
 
-import draft.assets
 import draft.jinja
 import draft.util
 
@@ -32,8 +30,6 @@ STATIC_URL = '/static/'
 
 app = Flask(__name__)
 DEVELOPMENT = maybe_enable_dev_mode(app)
-
-#assets.setup(app)
 
 # Load custom Jinja functions for Draft
 jinja.Extensions(app)

@@ -11,6 +11,7 @@ Install the following dependencies:
 * pip
 * virtualenv
 * redis
+* compass [^meh-compass]
 
 If you don't have the required python version, install it (see `.python-version`). After that, in the draft.sx root run
 
@@ -25,3 +26,6 @@ After that you can start the application by running `start.sh`. Note that you mi
 Follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-14-04), but using Python 3. Gunicorn server can be started using 
 
     gunicorn --workers 3 --bind unix:draftsx.sock -m 007 draft:app
+
+
+[^meh-compass]: I wanted to keep it python-only, but the python tooling around SASS was just too cumbersome to use :(
