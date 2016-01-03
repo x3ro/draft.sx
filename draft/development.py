@@ -7,8 +7,11 @@ def maybe_enable_dev_mode(app):
     if not 'DEVELOPMENT' in os.environ:
         return False
 
+    app.debug = True
+    app.logger.debug("Debug mode enabled")
+
     Compress(app)                                      # Enable gzip
-    app.config['ASSETS_DEBUG'] = True                  # Don't pack assets (css/js)
-    app.wsgi_app = ProfilerMiddleware(app.wsgi_app)    # Enable profiler
+    #app.config['ASSETS_DEBUG'] = True                  # Don't pack assets (css/js)
+    #app.wsgi_app = ProfilerMiddleware(app.wsgi_app)    # Enable profiler
 
     return True

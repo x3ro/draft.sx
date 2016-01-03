@@ -5,19 +5,6 @@ class HashConverter(BaseConverter):
         super(HashConverter, self).__init__(url_map)
         self.regex = r'[a-fA-F\d]+'
 
-
-def gist_page_title(content):
-    title = "Untitled"
-
-    gist_title = get_dict_element(content, 'description', 'Untitled')
-    if len(gist_title) > 0:
-        title = gist_title
-
-    if "draft.sx" in gist_title:
-        return gist_title
-    else:
-        return "draft.sx &#183; %s" % (title)
-
 def get_dict_element(someDict, stringPath, defaultValue):
     """
     Return the value pointed to by `stringPath` in `someDict`. If it does not exist,

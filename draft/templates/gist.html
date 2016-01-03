@@ -6,8 +6,8 @@
 
 
 {% block navigation %}
-    Written by <a id="author-link" href="{{ dict_get(content, 'owner.html_url', 'javascript:void(0);') }}">
-        {{ dict_get(content, 'owner.login', 'anonymous') }}
+    Written by <a id="author-link" href="{{ content.author_url }}">
+        {{ content.author }}
     </a>
 {% endblock %}
 
