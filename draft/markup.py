@@ -1,3 +1,5 @@
+import emoji
+
 from markdown import markdown
 from . import app
 
@@ -33,6 +35,7 @@ def render(content):
     """
     if content['language'] in RENDERABLE:
         app.logger.debug('{}: renderable!'.format(content['filename']))
-        content['rendered'] = markdown(content['content'], extensions=EXTENSIONS)
+        content['rendered'] = emoji.emojize(content['content'], use_aliases=True)
+        content['rendered'] = markdown(content['rendered'], extensions=EXTENSIONS)
 
     return content
