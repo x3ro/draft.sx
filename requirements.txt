@@ -20,4 +20,4 @@ six==1.8.0
 virtualenv==1.11.6
 gunicorn==19.3.0
 emoji==0.3.9
-
+emoji-unicode==0.2
