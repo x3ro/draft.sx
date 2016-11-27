@@ -3,3 +3,7 @@ web:
   environment:
     - FLASK_APP=./draft.py
     - FLASK_DEBUG=1
+
+compass:
+  restart: always
+  command: bash -c 'cd /usr/src/app && compass watch --poll'
