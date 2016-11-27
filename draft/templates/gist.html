@@ -33,4 +33,7 @@
 {% endblock js %}
 
 {% block extra_head %}
+    <meta property="og:title" content="{{ content.description }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="http://draft.sx/{{ gist_id }}" />
 {% endblock %}
