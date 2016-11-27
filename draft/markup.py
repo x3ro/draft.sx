@@ -1,25 +1,24 @@
 import emoji
 import emoji_unicode
 import re
+import bleach
 
 from markdown import markdown
 from . import app
 
 RENDERABLE = (u'Markdown', u'Text', u'Literate CoffeeScript')
 
-# XXX This isn't used anymore. Should it be re-enabled with current MD parser?
 ALLOWED_TAGS = [
     "a", "abbr", "acronym", "b", "blockquote", "code", "em", "i", "li", "ol", "strong",
     "ul", "br", "img", "span", "div", "pre", "p", "dl", "dd", "dt", "tt", "cite", "h1",
     "h2", "h3", "h4", "h5", "h6", "table", "col", "tr", "td", "th", "tbody", "thead",
-    "colgroup", "hr",
+    "colgroup", "hr", "footer", "del", "ins"
 ]
 
 ALLOWED_ATTRIBUTES = {
-    "a": ["href", "title"],
-    "acronym": ["title"],
-    "abbr": ["title"],
-    "img": ["src"],
+    "*": ["class", "title"],
+    "a": ["href"],
+    "img": ["src", "alt"],
 }
 
 EXTENSIONS = ['attr_list', 'fenced_code', 'codehilite', 'def_list', 'footnotes',
@@ -42,6 +41,11 @@ def render(content):
         content['rendered'] = emoji.emojize(content['content'], use_aliases=True)
         content['rendered'] = re.sub(EMOJI_PATTERN, emoji_match_handler, content['rendered'])
         content['rendered'] = markdown(content['rendered'], extensions=EXTENSIONS)
+        content['rendered'] = bleach.clean(
+            content['rendered'],
+            tags=ALLOWED_TAGS,
+            attributes=ALLOWED_ATTRIBUTES
+        )
 
     return content
 

@@ -5,7 +5,7 @@ Markdown==2.5.1
 MarkupSafe==0.23
 Pygments==1.6
 Werkzeug==0.9.6
-bleach==1.4
+bleach==1.5
 hiredis==0.1.5
 honcho==0.6.6
 html5lib==0.999
