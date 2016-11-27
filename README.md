@@ -4,28 +4,22 @@ Painlessly share your markdown documents.
 
 
 
-## Running locally
+## Running
 
 Install the following dependencies:
 
-* pip
-* virtualenv
-* redis
+* docker
+* docker-compose
 * compass [^meh-compass]
 
-If you don't have the required python version, install it (see `.python-version`). After that, in the draft.sx root run
+For the development setup, run
 
-    virtualenv venv
+    docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
-After that you can start the application by running `start.sh`. Note that you might need to adjust the way in which redis is started in `Procfile`!
+For the production environment, just run
 
+    docker-compose up
 
-
-## Deploying
-
-Follow [this guide](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-14-04), but using Python 3. Gunicorn server can be started using 
-
-    gunicorn --workers 3 --bind unix:draftsx.sock -m 007 draft:app
-
+**Note:** You need to run `docker-compose build` after changing `requirements.txt`.
 
 [^meh-compass]: I wanted to keep it python-only, but the python tooling around SASS was just too cumbersome to use :(

@@ -1,0 +1,5 @@
+web:
+  command: flask run -h 0.0.0.0
+  environment:
+    - FLASK_APP=./draft.py
+    - FLASK_DEBUG=1

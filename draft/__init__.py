@@ -19,7 +19,7 @@ GITHUB_AUTH_PARAMS = {'client_id': GITHUB_CLIENT_ID,
                'client_secret': GITHUB_CLIENT_SECRET}
 
 CACHE_EXPIRATION = 120  # seconds
-redis = StrictRedis()
+redis = StrictRedis(host='redis')
 PORT = 5000
 
 STATIC_URL = '/static/'
