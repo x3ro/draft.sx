@@ -9,6 +9,10 @@ from flask import render_template
 def homepage():
     return render_gist('691fe85788524e6627fa')
 
+@app.route('/impressum')
+def render_impressum():
+    return render_template('impressum.html')
+
 @app.route('/<hash:id>')
 def render_gist(id):
     _gist = gist.get(id)
