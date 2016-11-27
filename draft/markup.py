@@ -46,6 +46,7 @@ def render(content):
             tags=ALLOWED_TAGS,
             attributes=ALLOWED_ATTRIBUTES
         )
+        content['rendered'] = bleach.linkify(content['rendered'])
 
     return content
 
