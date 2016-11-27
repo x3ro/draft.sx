@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ssh lucas@46.101.102.64 \
+    '   set -e
+        set -x
+        cd ~/draft.sx
+        git fetch
+        git reset --hard origin/master
+        sudo docker-compose build
+        sudo /bin/systemctl restart draftsx
+        sudo /bin/systemctl status draftsx
+    '

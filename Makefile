@@ -11,16 +11,7 @@ production:
 build:
 	docker-compose build
 
-deploy: build
-	scp build/draftsx.tgz draft.sx:/home/lucas
-	ssh draft.sx '	mv draft.sx "$(shell date +"%s")" && \
-					mkdir draft.sx && \
-					tar -xzf draftsx.tgz -C draft.sx && \
-					cd draft.sx && \
-					virtualenv venv && \
-					venv/bin/pip install -r requirements.txt && \
-					cd .. && \
-					sudo /usr/local/bin/draftsx-restart \
-				'
+deploy:
+	scripts/deploy
 
 .PHONY: run build deploy

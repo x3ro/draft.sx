@@ -1,0 +1,12 @@
+[Unit]
+Description=draft.sx
+Requires=docker.service
+After=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/local/bin/docker-compose -f /home/lucas/draft.sx/docker-compose.yml up
+ExecStop=/usr/local/bin/docker-compose -f /home/lucas/draft.sx/docker-compose.yml stop
+
+[Install]
+WantedBy=multi-user.target

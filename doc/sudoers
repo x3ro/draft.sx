@@ -1,0 +1,6 @@
+lucas        ALL=(ALL)       NOPASSWD: /usr/bin/docker
+lucas        ALL=(ALL)       NOPASSWD: /usr/local/bin/docker-compose
+lucas        ALL=(ALL)       NOPASSWD: /bin/systemctl restart draftsx
+lucas        ALL=(ALL)       NOPASSWD: /bin/systemctl stop draftsx
+lucas        ALL=(ALL)       NOPASSWD: /bin/systemctl start draftsx
+lucas        ALL=(ALL)       NOPASSWD: /bin/systemctl status draftsx
