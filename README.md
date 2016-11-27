@@ -10,16 +10,16 @@ Install the following dependencies:
 
 * docker
 * docker-compose
-* compass [^meh-compass]
+* make
 
 For the development setup, run
 
-    docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+    make run
 
-For the production environment, just run
+For the production environment, run
 
-    docker-compose up
+    make production
 
-**Note:** You need to run `docker-compose build` after changing `requirements.txt`.
+**Note:** You need to run `make build` after changing `requirements.txt`.
 
 [^meh-compass]: I wanted to keep it python-only, but the python tooling around SASS was just too cumbersome to use :(

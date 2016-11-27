@@ -2,21 +2,14 @@ PIP=venv/bin/pip
 PYTHON=venv/bin/python
 HONCHO=venv/bin/honcho
 
-run: reqs
-	${HONCHO} -f Procfile start
+run:
+	docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
 
-venv:
-	test -d venv || virtualenv venv
-
-reqs: requirements.txt venv
-	${PIP} install -r requirements.txt
+production:
+	docker-compose up
 
 build:
-	compass compile -e production --force
-	mkdir -p build
-	tar -v -czf build/draftsx.tgz --exclude ".git" --exclude "venv" \
-							   --exclude "build/*" --exclude ".*cache*" \
-							   --exclude "__pycache__" .
+	docker-compose build
 
 deploy: build
 	scp build/draftsx.tgz draft.sx:/home/lucas
@@ -30,4 +23,4 @@ deploy: build
 					sudo /usr/local/bin/draftsx-restart \
 				'
 
-.PHONY: reqs build deploy
+.PHONY: run build deploy
