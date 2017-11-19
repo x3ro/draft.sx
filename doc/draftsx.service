@@ -4,6 +4,7 @@ Requires=docker.service
 After=docker.service
 
 [Service]
+WorkingDirectory=/home/lucas/draft.sx
 Restart=always
 ExecStart=/usr/local/bin/docker-compose -f /home/lucas/draft.sx/docker-compose.yml up
 ExecStop=/usr/local/bin/docker-compose -f /home/lucas/draft.sx/docker-compose.yml stop
