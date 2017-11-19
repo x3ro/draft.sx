@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ssh lucas@46.101.102.64 \
+ssh lucas@46.101.204.162 \
     '   set -e
         set -x
         cd ~/draft.sx
