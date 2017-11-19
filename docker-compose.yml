@@ -16,7 +16,7 @@ nginx:
     - web:web
 
 compass:
-  restart: never
+  restart: 'no'
   build: ./docker/compass
   command: bash -c 'cd /usr/src/app && compass compile -e production --force'
   volumes:
