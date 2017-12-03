@@ -3,11 +3,11 @@ import os
 from . import app, STATIC_URL
 from . import gist
 
-from flask import render_template
+from flask import render_template, redirect
 
 @app.route('/')
 def homepage():
-    return render_gist('691fe85788524e6627fa')
+    return render_gist('b5807b9c969cef7420e0e6d4884aafd3')
 
 @app.route('/impressum')
 def render_impressum():
@@ -15,13 +15,4 @@ def render_impressum():
 
 @app.route('/<hash:id>')
 def render_gist(id):
-    _gist = gist.get(id)
-    return render_template(
-        'gist.html',
-        gist_id = id,
-        STATIC_URL = STATIC_URL,
-        content = _gist,
-        monitoring = {
-            'google_analytics': os.environ.get('GOOGLE_ANALYTICS')
-        }
-    )
+    return redirect("https://gist.github.com/" + id, code=301)
